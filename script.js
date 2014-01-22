@@ -1,9 +1,12 @@
-var fs = require('fs'),
+var version = "C3D Buddy 2.0.1",
+    fs = require('fs'),
     gui = require('nw.gui'),
     path = require('path'),
     home = process.env[(process.platform == 'win32') ? 'USERPROFILE' : 'HOME'],
     historyFolder = path.join(home, '/Library/Application Support/Cheetah3D/Render History'),
     child_process = require('child_process');
+
+$('#version').text(version);
 
 function exec(cmd){
     child_process.exec(cmd, function(error, stdout, stderr){
@@ -32,11 +35,18 @@ fs.readdir(historyFolder, function(err, files){
         subfolder = path.join(historyFolder, subfolder);
         fs.stat(subfolder, function(err, stats){
             if(!err && stats.isDirectory()){
-                var thumb = path.join(subfolder, 'thumbnail.png');
+                var image = path.join(subfolder, 'thumbnail.png');
+                
+                if( !fs.existsSync(image) ){
+                    image = path.join(subfolder, 'image.png');
+                } else if( !fs.existsSync(image) ){
+                    image = path.join(subfolder, 'image_00000.png');
+                }
+                
                 $('<div>')
                     .addClass('thumb')
                     .attr('data-path', subfolder)
-                    .css('background-image', 'url("file://' + thumb + '")')
+                    .append('<span></span><img src="file://' + image + '">')
                     .appendTo('#list');
             }
         });
@@ -72,10 +82,10 @@ function renderDict(infoPath){
 }
 
 $(window).on('mouseup', function(evt){
-    var target = $(evt.target),
+    var target = $(evt.target).closest('.thumb'),
         folder = target.attr('data-path');
         
-    if( target.is('.thumb') ){
+    if( target.length ){
         var imagePath = path.join(folder, 'image.png'),
             framePath = path.join(folder, 'image_00000.png'),
             moviePath = path.join(folder, 'movie.mov'),
@@ -113,7 +123,7 @@ $(window).on('mouseup', function(evt){
         if(origFile){
             if( fs.existsSync( origFile ) ){                
                 $('<button>')
-                    .text('Open Scene in Cheetah 3D')
+                    .text('Open Scene')
                     .on('click', function(){
                         exec('open "' + origFile + '"');
                     })

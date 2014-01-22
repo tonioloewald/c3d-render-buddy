@@ -99,27 +99,49 @@ button:active, .button:active, input[type=submit]:active {
 
 .thumb {
     width: 80px;
-    height: 61px;
-    padding: 2px;
+    height: 80px;
     display: inline-block;
-    background-repeat: no-repeat;
-    background-position: 50% 50%;
+    text-align: center;
 }
 
-.thumb:hover {
-    background-color: rgba(255,255,255,0.5);
+.thumb span {
+    display: inline-block;
+    height: 100%;
+    width: 0;
+    vertical-align: middle
+}
+.thumb img {
+    display: inline-block;
+    vertical-align: middle;
+    max-width: 100%;
+    max-height: 100%;
+    opacity: 0.8;
 }
 
-#debug {
+.thumb img:hover {
+    opacity: 1.0;
+}
+
+#debug, #version {
 	position: absolute;
-	bottom: 4px;
-	left: 4px;
-	color: #aaa;
+	color: black;
 	font-size: 80%;
 	cursor: pointer;
 	opacity: 0.3;
+	text-decoration: none;
+	border: 0;
 }
 
-#debug:hover {
+#debug {
+	top: 4px;
+	right: 4px;
+}
+
+#version {
+    bottom: 4px;
+    right: 4px;
+}
+
+#debug:hover, #version:hover {
 	opacity: 0.5;
 }
