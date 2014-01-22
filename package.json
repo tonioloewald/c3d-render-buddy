@@ -1,0 +1,14 @@
+{
+  "name": "C3D Render Buddy",
+  "main": "index.html",
+  "window": {
+    "title": "C3D Render Buddy",
+    "toolbar": false,
+    "frame": true,
+    "width": 1000,
+    "height": 600,
+    "position": "mouse",
+    "min_width": 320,
+    "min_height": 480
+  }
+}

@@ -1,0 +1,49 @@
+* {
+	font-family: "Helvetica Neue", Helvetica, Sans-serif;
+	font-weight: lighter;
+	-webkit-font-smoothing: antialiased; /* improves Chrome's appalling font-rendering in Mac OS X */
+	box-sizing: border-box;
+}
+
+body {
+    background-color: #aaa;
+    color: #444;
+}
+
+.fillwindow {
+	position: fixed; 
+	top: 0; 
+	left: 0; 
+	right: 0; 
+	bottom: 0;
+	overflow-x: hidden;
+	overflow-y: auto;
+	text-align: center;
+}
+
+.thumb {
+    width: 80px;
+    height: 61px;
+    padding: 2px;
+    display: inline-block;
+    background-repeat: no-repeat;
+    background-position: 50% 50%;
+}
+
+.thumb:hover {
+    background-color: rgba(255,255,255,0.5);
+}
+
+#debug {
+	position: absolute;
+	bottom: 4px;
+	left: 4px;
+	color: #aaa;
+	font-size: 80%;
+	cursor: pointer;
+	opacity: 0.3;
+}
+
+#debug:hover {
+	opacity: 0.5;
+}
