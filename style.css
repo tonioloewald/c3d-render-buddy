@@ -1,6 +1,6 @@
 * {
 	font-family: "Helvetica Neue", Helvetica, Sans-serif;
-	font-weight: lighter;
+	font-weight: normal;
 	-webkit-font-smoothing: antialiased; /* improves Chrome's appalling font-rendering in Mac OS X */
 	box-sizing: border-box;
 }
@@ -8,9 +8,68 @@
 body {
     background-color: #aaa;
     color: #444;
+    line-height: 0.5em;
 }
 
-.fillwindow {
+p, button, input, select, option, ul, ol, td, th {
+    font-size: 18px;
+    line-height: 1em;
+}
+
+a {
+    color: #222;
+    text-decoration: none;
+    border-bottom: 1px solid #222;
+}
+
+a:hover {
+    color: #642;
+    border-bottom: 1px solid #642;
+}
+
+a:active {
+    color: orange;
+    border-bottom: 1px solid orange;
+}
+
+table {
+    width: 100%;
+    background-color: #333;
+    border-collapse: collapse;
+    color: white;
+}
+tr:nth-child(2n) {
+    background-color: #444;
+}
+th, td {
+    padding: 3px 8px;
+}
+th {
+    text-align: right;
+    font-weight: bold;
+    text-transform: capitalize;
+}
+td {
+    text-align: left;
+}
+
+button, .button, input[type=submit] {
+    padding: 4px 6px;
+    background-color: #ddd;
+    border-radius: 4px;
+    border: 1px solid #aaa;
+}
+
+button:hover, .button:hover, input[type=submit]:hover {
+    border: 1px solid #abf;
+}
+
+button:active, .button:active, input[type=submit]:active {
+    background-color: #bbb;
+    border: 1px solid #abf;
+}
+
+#list, #preview {
 	position: fixed; 
 	top: 0; 
 	left: 0; 
@@ -19,6 +78,23 @@ body {
 	overflow-x: hidden;
 	overflow-y: auto;
 	text-align: center;
+}
+
+#list {
+    right: 50%;
+}
+
+#preview {
+    left: 50%;
+    background-color: #666;
+    padding: 8px;
+}
+
+#preview img {
+    display: block;
+    max-width: 100%;
+    max-height: 100%;
+    margin: auto;
 }
 
 .thumb {
