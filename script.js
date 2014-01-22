@@ -21,6 +21,12 @@ $('#debug').on('mouseup', function(){
 	gui.Window.get().showDevTools();
 });
 
+$('a[target="_blank"]').on('click', function(evt){
+	evt.preventDefault();
+	console.log(gui, $(this).attr('href'));
+	gui.Shell.openExternal($(this).attr('href'));
+});
+
 fs.readdir(historyFolder, function(err, files){
     $.each(files, function(idx, subfolder){
         subfolder = path.join(historyFolder, subfolder);
