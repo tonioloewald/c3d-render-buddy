@@ -30,28 +30,51 @@ $('a[target="_blank"]').on('click', function(evt){
 	gui.Shell.openExternal($(this).attr('href'));
 });
 
-fs.readdir(historyFolder, function(err, files){
-    $.each(files, function(idx, subfolder){
-        subfolder = path.join(historyFolder, subfolder);
-        fs.stat(subfolder, function(err, stats){
-            if(!err && stats.isDirectory()){
-                var image = path.join(subfolder, 'thumbnail.png');
+/*
+var win = gui.Window.get();
+var menubar = new gui.Menu({ type: "menubar" });
+win.menu = menubar;
+*/
+
+var menu = new gui.Menu();
+menu.append( new gui.MenuItem({ 
+        label: "Reload",
+        click: loadHistory
+    }) );
+document.body.addEventListener('contextmenu', function(ev) { 
+  ev.preventDefault();
+  menu.popup(ev.x, ev.y);
+  return false;
+});
+
+function loadHistory(){
+    fs.readdir(historyFolder, function(err, files){
+        $('#list').empty();
+        
+        $.each(files, function(idx, subfolder){
+            subfolder = path.join(historyFolder, subfolder);
+            fs.stat(subfolder, function(err, stats){
+                if(!err && stats.isDirectory()){
+                    var image = path.join(subfolder, 'thumbnail.png');
                 
-                if( !fs.existsSync(image) ){
-                    image = path.join(subfolder, 'image.png');
-                } else if( !fs.existsSync(image) ){
-                    image = path.join(subfolder, 'image_00000.png');
+                    if( !fs.existsSync(image) ){
+                        image = path.join(subfolder, 'image.png');
+                    } else if( !fs.existsSync(image) ){
+                        image = path.join(subfolder, 'image_00000.png');
+                    }
+                
+                    $('<div>')
+                        .addClass('thumb')
+                        .attr('data-path', subfolder)
+                        .append('<span></span><img src="file://' + image + '">')
+                        .prependTo('#list');
                 }
-                
-                $('<div>')
-                    .addClass('thumb')
-                    .attr('data-path', subfolder)
-                    .append('<span></span><img src="file://' + image + '">')
-                    .appendTo('#list');
-            }
+            });
         });
     });
-});
+}
+
+loadHistory();
 
 /**
     renders a simple table from an plist's dict key/value pairs

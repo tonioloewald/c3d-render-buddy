@@ -97,6 +97,13 @@ button:active, .button:active, input[type=submit]:active {
     margin: auto;
 }
 
+#preview table {
+    position: absolute;
+    left: 0;
+    right: 0;
+    bottom: 0;
+}
+
 .thumb {
     width: 80px;
     height: 80px;
